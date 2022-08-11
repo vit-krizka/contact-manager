@@ -1,7 +1,12 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using contact_manager.Data;
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ContactContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("ContactContext") ?? throw new InvalidOperationException("Connection string 'ContactContext' not found.")));
 
 var app = builder.Build();
 
