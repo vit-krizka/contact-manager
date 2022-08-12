@@ -1,11 +1,64 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Contact Manager";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Contact Manager</h1>
-
-</div>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Contact Manager</h1>
+    </div>
+    <p>
+        <a asp-page="./Contacts/Create">Create New</a>
+    </p>
+    <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">
+                    Name
+                </th>
+                <th scope="col">
+                    Surname
+                </th>
+                <th scope="col">
+                    Phone number
+                </th>
+                <th scope="col">
+                    E-mail
+                </th>
+                <th scope="col">
+                    Address
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Contact)
+            {
+                <tr scope="row">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        <a asp-page="./Contacts/Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="./Contacts/Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-page="./Contacts/Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
 
